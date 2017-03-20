@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.4" client="site" method="upgrade">
+	<author>Sergio Manzi</author>
+	<authorEmail>info@smz.it</authorEmail>
+	<authorUrl>smz.it</authorUrl>
+	<copyright>Copyright (C) 2013 - 2016 Sergio Manzi. All rights reserved.</copyright>
+	<license>GNU General Public License version 3 or (at your option) any later version.</license>
+	<name>SMZ SlideShow</name>
+	<description>MOD_SMZ_SLIDESHOW_DESC</description>
+	<version>3.5.8</version>
+	<creationDate>August 2016</creationDate>
+	<files folder="site">
+		<filename>helper.php</filename>
+		<filename>mod_smz_slideshow.xml</filename>
+		<filename module="mod_smz_slideshow">mod_smz_slideshow.php</filename>
+		<folder>classes</folder>
+		<folder>language</folder>
+		<folder>tmpl</folder>
+	</files>
+	<media destination="mod_smz_slideshow" folder="media">
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+	</media>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.mod_smz_slideshow.ini</language>
+		<language tag="en-GB">en-GB/en-GB.mod_smz_slideshow.sys.ini</language>
+	</languages>
+	<params/>
+	<config>
+		<fields name="params" addfieldpath="/modules/mod_smz_slideshow/admin/elements">
+			<fieldset name="basic">
+				<field type="note" label="MOD_SMZ_SLIDESHOW_INFO_LBL" description="MOD_SMZ_SLIDESHOW_INFO_TXT" class="alert alert-success" close="true" />
+			</fieldset>
+			<fieldset name="slideshow" label="MOD_SMZ_SLIDESHOW_SLIDESHOW_TAB_LBL">
+				<field name="smz_slideshow_center" type="radio" class="btn-group" default="1" label="MOD_SMZ_SLIDESHOW_CENTER_LBL" description="MOD_SMZ_SLIDESHOW_CENTER_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_responsive" type="radio" class="btn-group" default="1" label="MOD_SMZ_SLIDESHOW_RESPONSIVE_LBL" description="MOD_SMZ_SLIDESHOW_RESPONSIVE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_width"  type="text" default="600" label="MOD_SMZ_SLIDESHOW_WIDTH_LBL" description="MOD_SMZ_SLIDESHOW_WIDTH_DESC"/>
+				<field name="smz_slideshow_image_resize" type="list" default="original" label="MOD_SMZ_SLIDESHOW_IMAGE_RESIZE_LBL" description="MOD_SMZ_SLIDESHOW_IMAGE_RESIZE_DESC">
+					<option value="original">MOD_SMZ_SLIDESHOW_IMAGE_RESIZE_ORIGINAL</option>
+					<option value="stretch">MOD_SMZ_SLIDESHOW_IMAGE_RESIZE_STRETCH</option>
+					<option value="fill">MOD_SMZ_SLIDESHOW_IMAGE_RESIZE_FILL</option>
+					<option value="fit">MOD_SMZ_SLIDESHOW_IMAGE_RESIZE_FIT</option>
+				</field>
+				<field name="smz_slideshow_image_width" showon="smz_slideshow_image_resize:fit,fill,stretch" type="text" label="MOD_SMZ_SLIDESHOW_IMAGE_WIDTH_LBL" description="MOD_SMZ_SLIDESHOW_IMAGE_WIDTH_DESC" default="600"/>
+				<field name="smz_slideshow_image_height" showon="smz_slideshow_image_resize:fit,fill,stretch" type="text" label="MOD_SMZ_SLIDESHOW_IMAGE_HEIGHT_LBL" description="MOD_SMZ_SLIDESHOW_IMAGE_HEIGHT_DESC" default="400"/>
+				<field name="smz_slideshow_image_fit_bg" showon="smz_slideshow_image_resize:fit" type="color" default="#000" label="MOD_SMZ_SLIDESHOW_IMAGE_FIT_BG_LBL" description="MOD_SMZ_SLIDESHOW_IMAGE_FIT_BG_DESC"/>
+				<field name="smz_slideshow_transition" type="list" default="none" label="MOD_SMZ_SLIDESHOW_TRANSITION_LBL" description="MOD_SMZ_SLIDESHOW_TRANSITION_DESC">
+					<option value="none">MOD_SMZ_SLIDESHOW_TRANSITION_NONE</option>
+					<option value="fade">MOD_SMZ_SLIDESHOW_TRANSITION_FADE</option>
+					<option value="fadeout">MOD_SMZ_SLIDESHOW_TRANSITION_FADE_OUT</option>
+					<option value="scrollHorz">MOD_SMZ_SLIDESHOW_TRANSITION_SCROLLHORZ</option>
+				</field>
+				<field name="smz_slideshow_transition_speed" showon="smz_slideshow_transition:fade,fadeout,scrollHorz" type="text" default="500" label="MOD_SMZ_SLIDESHOW_TRANSITION_SPEED_LBL" description="MOD_SMZ_SLIDESHOW_TRANSITION_SPEED_DESC"/>
+				<field name="smz_slideshow_auto" type="radio" class="btn-group" default="1" label="MOD_SMZ_SLIDESHOW_AUTO_LBL" description="MOD_SMZ_SLIDESHOW_AUTO_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_timeout" showon="smz_slideshow_auto:1" type="text" default="5000" label="MOD_SMZ_SLIDESHOW_TIMEOUT_LBL" description="MOD_SMZ_SLIDESHOW_TIMEOUT_DESC"/>
+				<field name="smz_slideshow_pause_onhover" showon="smz_slideshow_auto:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_PAUSE_ONHOVER_LBL" description="MOD_SMZ_SLIDESHOW_PAUSE_ONHOVER_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field type="note" label="MOD_SMZ_SLIDESHOW_NAVIGATOR_SECTION_LBL" />
+				<field name="smz_slideshow_show_nav_buttons" type="radio" class="btn-group" default="1" label="MOD_SMZ_SLIDESHOW_SHOW_NAV_BUTTONS_LBL" description="MOD_SMZ_SLIDESHOW_SHOW_NAV_BUTTONS_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_show_pager" type="radio" class="btn-group" default="1" label="MOD_SMZ_SLIDESHOW_SHOW_PAGER_LBL" description="MOD_SMZ_SLIDESHOW_SHOW_PAGER_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_pager_position" showon="smz_slideshow_show_pager:1" type="list" default="bottomcenter" label="MOD_SMZ_SLIDESHOW_PAGER_POSITION_LBL" description="MOD_SMZ_SLIDESHOW_PAGER_POSITION_DESC">
+					<option value="bottomcenter">MOD_SMZ_SLIDESHOW_POSITION_BOTTOM_CENTER</option>
+					<option value="bottomleft">MOD_SMZ_SLIDESHOW_POSITION_BOTTOM_LEFT</option>
+					<option value="bottomright">MOD_SMZ_SLIDESHOW_POSITION_BOTTOM_RIGHT</option>
+					<option value="topcenter">MOD_SMZ_SLIDESHOW_POSITION_TOP_CENTER</option>
+					<option value="topleft">MOD_SMZ_SLIDESHOW_POSITION_TOP_LEFT</option>
+					<option value="topright">MOD_SMZ_SLIDESHOW_POSITION_TOP_RIGHT</option>
+					<option value="abovecenter">MOD_SMZ_SLIDESHOW_POSITION_ABOVE_CENTER</option>
+					<option value="aboveleft">MOD_SMZ_SLIDESHOW_POSITION_ABOVE_LEFT</option>
+					<option value="aboveright">MOD_SMZ_SLIDESHOW_POSITION_ABOVE_RIGHT</option>
+					<option value="belowcenter">MOD_SMZ_SLIDESHOW_POSITION_BELOW_CENTER</option>
+					<option value="belowleft">MOD_SMZ_SLIDESHOW_POSITION_BELOW_LEFT</option>
+					<option value="belowright">MOD_SMZ_SLIDESHOW_POSITION_BELOW_RIGHT</option>
+				</field>
+				<field name="smz_slideshow_pager_v_margin" showon="smz_slideshow_show_pager:1" type="text" default="5" label="MOD_SMZ_SLIDESHOW_PAGER_V_MARGIN_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_V_PAGER_DESC"/>
+				<field name="smz_slideshow_pager_h_margin" showon="smz_slideshow_show_pager:1" type="text" default="5" label="MOD_SMZ_SLIDESHOW_PAGER_H_MARGIN_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_H_PAGER_DESC"/>
+				<field name="smz_slideshow_allow_swipe" type="radio" class="btn-group" default="1" label="MOD_SMZ_SLIDESHOW_ALLOW_SWIPE_LBL" description="MOD_SMZ_SLIDESHOW_SHOW_ALLOW_SWIPE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_controls_hidden_phone" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_CONTROLS_HIDDEN_PHONE_LBL" description="MOD_SMZ_SLIDESHOW_CONTROLS_HIDDEN_PHONE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="source" label="MOD_SMZ_SLIDESHOW_CONTENT_TAB_LBL">
+				<field type="note" label="MOD_SMZ_SLIDESHOW_SOURCE_SECTION_LBL" />
+				<field name="smz_slideshow_count" default="5" type="text" label="MOD_SMZ_SLIDESHOW_COUNT_LBL" description="MOD_SMZ_SLIDESHOW_COUNT_DESC" />
+				<field name="slides_source" type="list" default="0" label="MOD_SMZ_SLIDESHOW_SLIDES_SOURCE_LBL" description="MOD_SMZ_SLIDESHOW_SLIDES_SOURCE_DESC">
+					<option value="0">MOD_SMZ_SLIDESHOW_FOLDER_IMAGE_SRC</option>
+					<option value="1">MOD_SMZ_SLIDESHOW_CATEGORIES_SRC</option>
+					<option value="2">MOD_SMZ_SLIDESHOW_ARTICLES_SRC</option>
+				</field>
+				<field name="smz_slideshow_article_image_source" showon="slides_source:1,2" type="list" default="1" label="MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_LBL" description="MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_DESC">
+					<option value="1">MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_INTRO_IMAGE</option>
+					<option value="2">MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_FULL_IMAGE</option>
+					<option value="3">MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_FIRST_IMAGE</option>
+				</field>
+				<field name="smz_slideshow_folder_image" showon="slides_source:0" show_root="true" type="text" label="MOD_SMZ_SLIDESHOW_FOLDER_IMAGE_LBL" description="MOD_SMZ_SLIDESHOW_FOLDER_IMAGE_DESC" />
+				<field name="smz_slideshow_categories" showon="slides_source:1" show_root="true" type="category" extension="com_content" multiple="true" size="10" label="MOD_SMZ_SLIDESHOW_CATEGORIES_LBL" description="MOD_SMZ_SLIDESHOW_CATEGORIES_DESC" />
+				<field name="smz_slideshow_article_ids" showon="slides_source:2" show_root="true" type="text"  label="MOD_SMZ_SLIDESHOW_ARTICLES_LBL" description="MOD_SMZ_SLIDESHOW_ARTICLES_DESC" />
+				<field name="smz_slideshow_categories_children" showon="slides_source:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_CATEGORIES_CHILDREN_LBL" description="MOD_SMZ_SLIDESHOW_CATEGORIES_CHILDREN_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_featuredonly" showon="slides_source:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_FEATUREDONLY_LBL" description="MOD_SMZ_SLIDESHOW_FEATUREDONLY_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_orderby" showon="slides_source:1,2" type="list" default="1" label="MOD_SMZ_SLIDESHOW_ORDER_BY_LBL" description="MOD_SMZ_SLIDESHOW_ORDER_BY_DESC">
+					<option value="1">MOD_SMZ_SLIDESHOW_ORDER_BY_ORDERING</option>
+					<option value="2">MOD_SMZ_SLIDESHOW_ORDER_BY_TITLE</option>
+					<option value="3">MOD_SMZ_SLIDESHOW_ORDER_BY_CREATED</option>
+					<option value="4">MOD_SMZ_SLIDESHOW_ORDER_BY_MODIFIED</option>
+					<option value="5">MOD_SMZ_SLIDESHOW_ORDER_BY_ID</option>
+				</field>
+				<field name="smz_slideshow_ordering" showon="slides_source:1,2" type="list" default="ASC" label="MOD_SMZ_SLIDESHOW_ORDERING_LBL" description="MOD_SMZ_SLIDESHOW_ORDERING_DESC">
+					<option value="ASC">MOD_SMZ_SLIDESHOW_ORDERING_ASCENDING</option>
+					<option value="DESC">MOD_SMZ_SLIDESHOW_ORDERING_DESCENDING</option>
+				</field>
+
+				<field type="note" label="MOD_SMZ_SLIDESHOW_LINKING_SECTION_LBL" />
+				<field name="smz_slideshow_image_link" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_IMAGE_LINK_LBL" description="MOD_SMZ_SLIDESHOW_IMAGE_LINK_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_article_image_link" showon="smz_slideshow_image_link:1" type="list" default="0" label="MOD_SMZ_SLIDESHOW_ARTICLE_IMAGE_LINK_LBL" description="MOD_SMZ_SLIDESHOW_ARTICLE_IMAGE_LINK_DESC">
+					<option value="1">MOD_SMZ_SLIDESHOW_IMAGE_LINK_SELF</option>
+					<option value="2">MOD_SMZ_SLIDESHOW_IMAGE_LINK_ARTICLE</option>
+					<option value="3">MOD_SMZ_SLIDESHOW_IMAGE_LINK_URLA</option>
+					<option value="4">MOD_SMZ_SLIDESHOW_IMAGE_LINK_URLB</option>
+					<option value="5">MOD_SMZ_SLIDESHOW_IMAGE_LINK_URLC</option>
+				</field>
+				<field name="smz_slideshow_image_link_target" showon="smz_slideshow_image_link:1" type="list" default="0" label="MOD_SMZ_SLIDESHOW_IMAGE_LINK_TARGET_LBL" description="MOD_SMZ_SLIDESHOW_IMAGE_LINK_TARGET_DESC">
+					<option value="0">MOD_SMZ_SLIDESHOW_IMAGE_LINK_MODAL</option>
+					<option value="1">MOD_SMZ_SLIDESHOW_IMAGE_LINK_PARENT</option>
+					<option value="2">MOD_SMZ_SLIDESHOW_IMAGE_LINK_NEW</option>
+				</field>
+				<field name="fancybox_grouping" showon="smz_slideshow_image_link:1" type="list" default="data-fancybox-group" label="PLG_SMZ_SLIDESHOW_FANCYBOX_GROUPING" description="PLG_SMZ_SLIDESHOW_FANCYBOX_GROUPING_DESC">
+					<option value="data-fancybox-group">PLG_SMZ_SLIDESHOW_DATAFANCYBOXGROUP</option>
+					<option value="rel">PLG_SMZ_SLIDESHOW_REL</option>
+				</field>
+
+				<field type="note" label="MOD_SMZ_SLIDESHOW_OVERLAY_SECTION_LBL" showon="slides_source:1,2" />
+				<field name="smz_slideshow_show_overlay" showon="slides_source:1,2" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_SHOW_OVERLAY_LBL" description="MOD_SMZ_SLIDESHOW_SHOW_OVERLAY_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_overlay_position" showon="smz_slideshow_show_overlay:1" type="list" default="bottomleft" label="MOD_SMZ_SLIDESHOW_OVERLAY_POSITION_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_POSITION_DESC">
+					<option value="bottomleft">MOD_SMZ_SLIDESHOW_POSITION_BOTTOM_LEFT</option>
+					<option value="bottomright">MOD_SMZ_SLIDESHOW_POSITION_BOTTOM_RIGHT</option>
+					<option value="topleft">MOD_SMZ_SLIDESHOW_POSITION_TOP_LEFT</option>
+					<option value="topright">MOD_SMZ_SLIDESHOW_POSITION_TOP_RIGHT</option>
+				</field>
+				<field name="smz_slideshow_overlay_v_margin" showon="smz_slideshow_show_overlay:1" type="text" default="0" label="MOD_SMZ_SLIDESHOW_OVERLAY_V_MARGIN_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_V_MARGIN_DESC"/>
+				<field name="smz_slideshow_overlay_h_margin" showon="smz_slideshow_show_overlay:1" type="text" default="0" label="MOD_SMZ_SLIDESHOW_OVERLAY_H_MARGIN_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_H_MARGIN_DESC"/>
+				<field name="smz_slideshow_overlay_width" showon="smz_slideshow_show_overlay:1" type="text" default="100" label="MOD_SMZ_SLIDESHOW_OVERLAY_WIDTH_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_WIDTH_DESC"/>
+				<field name="smz_slideshow_overlay_show_title" showon="smz_slideshow_show_overlay:1" type="radio" class="btn-group" default="1" label="MOD_SMZ_SLIDESHOW_OVERLAY_SHOW_TITLE_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_SHOW_TITLE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_overlay_show_readmore" showon="smz_slideshow_show_overlay:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_OVERLAY_SHOW_READMORE_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_SHOW_READMORE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_overlay_show_desc" showon="smz_slideshow_show_overlay:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_OVERLAY_SHOW_DESC_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_SHOW_DESC_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_overlay_desc_length" showon="smz_slideshow_overlay_show_desc:1" type="text" default="0" label="MOD_SMZ_SLIDESHOW_OVERLAY_DESC_LENGTH_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_DESC_LENGTH_DESC"/>
+				<field name="smz_slideshow_overlay_hidden_phone" showon="smz_slideshow_show_overlay:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_OVERLAY_HIDDEN_PHONE_LBL" description="MOD_SMZ_SLIDESHOW_OVERLAY_HIDDEN_PHONE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field type="note" showon="slides_source:1,2" label="MOD_SMZ_SLIDESHOW_CAPTION_SECTION_LBL" />
+				<field name="smz_slideshow_show_caption" showon="slides_source:1,2" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_SHOW_CAPTION_LBL" description="MOD_SMZ_SLIDESHOW_SHOW_CAPTION_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_caption_link_to_article" showon="smz_slideshow_show_caption:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_CAPTION_LINK_TO_ARTICLE_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_LINK_TO_ARTICLE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_caption_position" showon="smz_slideshow_show_caption:1" type="list" default="below" label="MOD_SMZ_SLIDESHOW_CAPTION_POSITION_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_POSITION_DESC">
+					<option value="below">MOD_SMZ_SLIDESHOW_POSITION_BELOW</option>
+					<option value="above">MOD_SMZ_SLIDESHOW_POSITION_ABOVE</option>
+				</field>
+				<field name="smz_slideshow_caption_v_margin" showon="smz_slideshow_show_caption:1" type="text" default="0" label="MOD_SMZ_SLIDESHOW_CAPTION_V_MARGIN_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_V_MARGIN_DESC"/>
+				<field name="smz_slideshow_caption_h_margin" showon="smz_slideshow_show_caption:1" type="text" default="0" label="MOD_SMZ_SLIDESHOW_CAPTION_H_MARGIN_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_H_MARGIN_DESC"/>
+				<field name="smz_slideshow_caption_width" showon="smz_slideshow_show_caption:1" type="text" default="100" label="MOD_SMZ_SLIDESHOW_CAPTION_WIDTH_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_WIDTH_DESC"/>
+				<field name="smz_slideshow_caption_show_title" showon="smz_slideshow_show_caption:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_CAPTION_SHOW_TITLE_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_SHOW_TITLE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_caption_show_readmore" showon="smz_slideshow_show_caption:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_CAPTION_SHOW_READMORE_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_SHOW_READMORE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_caption_show_desc" showon="smz_slideshow_show_caption:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_CAPTION_SHOW_DESC_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_SHOW_DESC_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="smz_slideshow_caption_desc_length" showon="smz_slideshow_caption_show_desc:1" type="text" default="0" label="MOD_SMZ_SLIDESHOW_CAPTION_DESC_LENGTH_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_DESC_LENGTH_DESC"/>
+				<field name="smz_slideshow_caption_hidden_phone" showon="smz_slideshow_show_caption:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_CAPTION_HIDDEN_PHONE_LBL" description="MOD_SMZ_SLIDESHOW_CAPTION_HIDDEN_PHONE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="advanced">
+				<field name="fancybox_grouping" type="list" default="data-fancybox-group" label="PLG_SMZ_SLIDESHOW_FANCYBOX_GROUPING" description="PLG_SMZ_SLIDESHOW_FANCYBOX_GROUPING_DESC">
+					<option value="data-fancybox-group">PLG_SMZ_SLIDESHOW_DATAFANCYBOXGROUP</option>
+					<option value="rel">PLG_SMZ_SLIDESHOW_REL</option>
+				</field>
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
+				<field name="moduleclass_sfx" type="text" default="" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

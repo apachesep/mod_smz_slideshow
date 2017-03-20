@@ -1,0 +1,134 @@
+.cycle-next,
+.cycle-prev {
+	position: absolute;
+	background: url("../images/buttons.png") 0 50px no-repeat transparent;
+	top: 50%;
+	width: 50px;
+	height: 50px;
+	margin-top: -25px;
+	z-index: 920;
+	text-indent: -5000px;
+	overflow: hidden;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+}
+
+.cycle-prev {
+	left: 15px;
+	background-position: 0 0;
+}
+.cycle-next {
+	right: 15px;
+	background-position: 0 -50px;
+}
+
+div.cycle-slideshow:hover > .cycle-next,
+div.cycle-slideshow:hover > .cycle-prev {
+	opacity: 0.75;
+	transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+}
+
+.msie-le8 .cycle-next,
+.msie-le8 .cycle-prev {
+	display:none;
+}
+
+.msie-le8 div.cycle-slideshow:hover > .cycle-next,
+.msie-le8 div.cycle-slideshow:hover > .cycle-prev {
+	display: block;
+}
+
+.cycle-pager {
+	height: 15px;
+	overflow: hidden;
+	z-index: 910;
+}
+
+.cycle-pager span {
+	display: inline-block;
+	background-image: url("../images/pager.png");
+	background-repeat: repeat;
+	background-position: 49px 21px;
+	color: transparent;
+	text-indent: -5000px;
+	font-size: 0;
+	margin-right: 5px;
+	padding-top: 15px;
+	padding-right: 15px;
+	cursor: pointer;
+}
+
+.msie-le8 .cycle-pager span {
+	padding-top:13px;
+}
+
+.msie-ge9 .cycle-pager span {
+	font-size:1px;
+	padding-top:14px;
+}
+
+.cycle-pager span:last-child {
+	margin-right: 0;
+}
+
+.cycle-pager span.cycle-pager-active {
+	background-position: 21px 21px;
+}
+
+.cycle-caption h4 {
+	margin-top: 0;
+}
+
+a.slideshow-caption-link {
+	text-decoration:none;
+}
+
+div.cycle-overlay { 
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 5px;
+	z-index: 900;
+	padding: 0px;
+}
+
+.msie-le8 div.cycle-overlay {
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#80000000', endColorstr='#80000000');
+}
+
+div.cycle-overlay div {
+	padding: 5px;
+}
+
+.cycle-overlay a, .cycle-overlay a:hover {
+	color: yellow; 
+}
+
+.cycle-overlay h4 {
+	color: white; 
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+
+.cycle-overlay p {
+	margin-bottom: 0px;
+}
+
+/* Anchors */
+.cycle-slideshow > a { 
+    position: absolute; top: 0; left: 0;
+	display: block;
+	padding: 0;
+    width: 100%;
+}
+
+/* Images within anchors*/
+.cycle-slideshow > a > img { 
+    position: static;
+    display: block;
+	margin: 0 auto;
+}
+
+
