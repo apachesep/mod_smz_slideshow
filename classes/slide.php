@@ -27,6 +27,7 @@ class SMZSlide extends stdClass {
 	var $id = null;
 	var $category = null;
 	var $image = null;
+	var $filename = null;
 	var $title = null;
 	var $description = null;
 	var $link = null;
@@ -65,21 +66,14 @@ class SMZSlide extends stdClass {
 					$this->image = $this->getFirstImage($article->introtext . $article->fulltext);
 			}
 
-			$maxlength = 0;
-			if ($this->params->get('smz_slideshow_overlay_show_desc',0))
+			$this->description = trim(preg_replace('/\s+/', ' ', $article->introtext));
+
+			if ($this->params->get('smz_slideshow_prepare_content', 0))
 			{
-				$maxlength = $this->params->get('smz_slideshow_overlay_desc_length', 0);
-			}
-			if ($this->params->get('smz_slideshow_caption_show_desc',0))
-			{
-				$maxlength = max($maxlength,$this->params->get('smz_slideshow_caption_desc_length', 0));
+				JPluginHelper::importPlugin('content');
+				$this->description = JHtml::_('content.prepare', $this->description, '', 'mod_smz_slideshow.content');
 			}
 
-			$this->description = trim(preg_replace('/\s+/', ' ', $article->introtext));
-			if ($maxlength > 0)
-			{
-				$this->description = substr($this->description, 0, $maxlength);
-			}
 			$this->description = htmlentities($this->description, ENT_COMPAT, "UTF-8", false);
 			$this->link = JRoute::_(ContentHelperRoute::getArticleRoute($article->id, $article->catid));
 			$this->id = $id;
@@ -119,11 +113,16 @@ class SMZSlide extends stdClass {
 	}
 
 
-	public function loadImages($image) {
-		$this->image = $image;
+	public function loadImages($dir, $filename) {
+		$this->filename = $filename;
+		$this->title = $filename;
+		$this->description = '';
+		$this->image = $dir . '/' . $filename;
+		$this->id = substr(md5($this->image), 0, 8);
+
 		if ($this->params->get('smz_slideshow_image_link', 0) > 0)
 		{
-			$this->url = '/' . $image;
+			$this->url = '/' . $this->image;
 		}
 		else
 		{

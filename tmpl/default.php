@@ -117,7 +117,7 @@ if ($show_pager) {
 if ($pager_overlay) $pager_css .= 'position:absolute;';
 
 // Overlay
-$show_overlay = $params->get('smz_slideshow_show_overlay', 1) && ($params->get('slides_source', 0) > 0);  // No overlay if source == folder
+$show_overlay = $params->get('smz_slideshow_show_overlay', 1);
 $overlay_show_title = $params->get('smz_slideshow_overlay_show_title', 0);
 $overlay_show_desc = $params->get('smz_slideshow_overlay_show_desc', 0);
 $overlay_show_readmore = $params->get('smz_slideshow_overlay_show_readmore', 0);
@@ -162,7 +162,7 @@ if ($show_overlay) {
 // Caption
 $caption_before = false;
 $caption_after = false;
-$show_caption = $params->get('smz_slideshow_show_caption', 1) && ($params->get('slides_source', 0) > 0);  // No caption if source == folder
+$show_caption = $params->get('smz_slideshow_show_caption', 1);
 $caption_show_title = $params->get('smz_slideshow_caption_show_title', 0);
 $caption_show_desc = $params->get('smz_slideshow_caption_show_desc', 0);
 $caption_show_readmore = $params->get('smz_slideshow_caption_show_readmore', 0);
@@ -205,7 +205,8 @@ if ($link_target == 0)
 echo "<div id='{$slideshow_name}-container-{$module->id}' class='{$slideshow_name}{$moduleclass_sfx}{$browser_class}'";
 echo " style='";
 if ($responsive) {
-	echo "width:100%;max-width:{$slideshow_width}px;";
+//	echo "width:100%;max-width:{$slideshow_width}px;";
+	echo "max-width:{$slideshow_width}px;";
 } else {
 	echo "width:{$slideshow_width}px;";
 }
@@ -271,11 +272,7 @@ else
 			switch ($link_target)
 			{
 			case 0:
-				$slide_title = mb_substr($slide->url,strrpos($slide->url,'/')+1); // just the file name
-				$slide_title = substr($slide_title, 0, strlen($slide_title)- strlen(strrchr($slide_title, '.'))); // remove suffix
-				$slide_title = preg_replace ('/[0-9-\s]*(.*)/', '$1', $slide_title); // remove first numbering sequence (nnnn - )
-				$slide_title = str_replace('_', ' ', $slide_title); // replace underline with space
-				echo " title='{$slide_title}' {$fancybox_grouping}='{$slideshow_name}-{$module->id}' class='fancybox'";
+				echo " title='{$slide->title}' {$fancybox_grouping}='{$slideshow_name}-{$module->id}' class='fancybox'";
 				break;
 			case 1:
 				break;

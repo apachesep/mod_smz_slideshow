@@ -46,14 +46,96 @@ class modSMZSlideShowHelper {
 					}
 					$tmp = pathinfo($image);
 					$slide = new SMZSlide($params);
-					$slide->loadImages($dir . '/' . $tmp['basename']);
+					$slide->loadImages($dir, $tmp['basename']);
 					$slides[] = $slide;
 				}
+
+				// Get images info
+				$handle = @fopen($imagesDir  . '/' . 'titles.txt', 'r');	// SMZDEV parametrize file name
+				if ($handle)
+				{
+					$titles = array();
+					$descriptions = array();
+					$ids = array();
+					
+					while (($ln = self::readline($handle, true, true)) !== false)
+					{
+						$ln_array = explode(':', $ln);							// SMZDEV parametrize tags separator
+						if (array_key_exists(0, $ln_array) && array_key_exists(1, $ln_array))
+						{
+							foreach ($ln_array as $i => $v)
+							{
+								$v = trim(strip_tags($v));
+								$ln_array[$i] = $v;
+							}
+							if (!empty($ln_array[1]))
+							{
+								$titles[$ln_array[0]] = $ln_array[1];
+							}
+							if (!empty($ln_array[2]))
+							{
+								$descriptions[$ln_array[0]] = $ln_array[2];
+							}
+							if (!empty($ln_array[3]))
+							{
+								$ids[$ln_array[0]] = $ln_array[3];
+							}
+						}
+					}
+					fclose($handle);
+
+					foreach($slides as $slide)
+					{
+						if (array_key_exists($slide->filename, $titles))
+						{
+							$slide->title = htmlentities($titles[$slide->filename], ENT_QUOTES);
+						}
+						if (array_key_exists($slide->filename, $descriptions))
+						{
+							$slide->description = htmlentities($descriptions[$slide->filename], ENT_QUOTES);
+						}
+						if (array_key_exists($slide->filename, $ids))
+						{
+							$slide->id = htmlentities($ids[$slide->filename], ENT_QUOTES);
+						}
+					}
+				}
+				// End Get images info
+				
 			}
 		}
 		return $slides;
 	}
 
+	// Read a "clean" line from file
+	static function readline($handle, $trim=false, $strip_tags=false) {
+		$ln = false;
+
+		if ($handle)
+		{
+			if (($ln = fgets($handle)) === false)
+			{
+				return false;
+			}
+
+			if (!mb_detect_encoding($ln, 'UTF-8', true))
+			{
+				$ln = utf8_encode($ln);
+			}
+
+			if ($strip_tags)
+			{
+				$ln = trim(strip_tags($ln));
+			}
+
+			if ($trim)
+			{
+				$ln = trim($ln);
+			}
+		}
+
+		return $ln;
+	}
 
 	static function getSlidesFromContent($params) {
 		$slides = array();
