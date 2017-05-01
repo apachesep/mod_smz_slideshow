@@ -231,10 +231,6 @@
 			</fieldset>
 
 			<fieldset name="advanced">
-				<field name="fancybox_grouping" type="list" default="data-fancybox-group" label="PLG_SMZ_SLIDESHOW_FANCYBOX_GROUPING" description="PLG_SMZ_SLIDESHOW_FANCYBOX_GROUPING_DESC">
-					<option value="data-fancybox-group">PLG_SMZ_SLIDESHOW_DATAFANCYBOXGROUP</option>
-					<option value="rel">PLG_SMZ_SLIDESHOW_REL</option>
-				</field>
 				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
 				<field name="moduleclass_sfx" type="text" default="" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
 			</fieldset>
