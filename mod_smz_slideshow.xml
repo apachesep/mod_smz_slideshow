@@ -105,7 +105,7 @@
 
 			<fieldset name="source" label="MOD_SMZ_SLIDESHOW_CONTENT_TAB_LBL">
 				<field type="note" label="MOD_SMZ_SLIDESHOW_SOURCE_SECTION_LBL" />
-				<field name="smz_slideshow_count" default="5" type="text" label="MOD_SMZ_SLIDESHOW_COUNT_LBL" description="MOD_SMZ_SLIDESHOW_COUNT_DESC" />
+				<field name="smz_slideshow_count" default="0" type="text" label="MOD_SMZ_SLIDESHOW_COUNT_LBL" description="MOD_SMZ_SLIDESHOW_COUNT_DESC" />
 				<field name="slides_source" type="list" default="0" label="MOD_SMZ_SLIDESHOW_SLIDES_SOURCE_LBL" description="MOD_SMZ_SLIDESHOW_SLIDES_SOURCE_DESC">
 					<option value="0">MOD_SMZ_SLIDESHOW_FOLDER_IMAGE_SRC</option>
 					<option value="1">MOD_SMZ_SLIDESHOW_CATEGORIES_SRC</option>
