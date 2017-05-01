@@ -228,18 +228,18 @@ if (empty($slides))
 }
 else
 {
-	if ($has_links) echo " data-cycle-slides=\"> a\"";
-	echo " data-cycle-auto-height=\"calc\"";
-	echo " data-cycle-center-horz=\"true\"";
-	echo " data-cycle-center-vert=\"true\"";
-	echo " data-cycle-fx=\"{$effect}\"";
-	echo " data-cycle-speed=\"{$speed}\"";
-	echo " data-cycle-swipe=\"{$allow_swipe}\"";
-	echo " data-cycle-timeout=\"{$timeout}\"";
-	if ($timeout != 0) echo " data-cycle-pause-on-hover=\"{$pause_onhover}\"";
-	if ($show_pager) echo " data-cycle-pager=\"#{$pager_name}-{$module->id}\"";
+	if ($has_links) echo " data-cycle-slides='> a'";
+	echo " data-cycle-auto-height='calc'";
+	echo " data-cycle-center-horz='true'";
+	echo " data-cycle-center-vert='true'";
+	echo " data-cycle-fx='{$effect}'";
+	echo " data-cycle-speed='{$speed}'";
+	echo " data-cycle-swipe='{$allow_swipe}'";
+	echo " data-cycle-timeout='{$timeout}'";
+	if ($timeout != 0) echo " data-cycle-pause-on-hover='{$pause_onhover}'";
+	if ($show_pager) echo " data-cycle-pager='#{$pager_name}-{$module->id}'";
 	if ($show_caption) {
-		echo " data-cycle-caption=\"#{$caption_name}-{$module->id}\"";
+		echo " data-cycle-caption='#{$caption_name}-{$module->id}'";
 		echo ' data-cycle-caption-template="';
 		if ($caption_link_to_article) echo "<a class='slideshow-caption-link' href={{readmore}}>";
 		if ($caption_show_title) echo '<h4>{{title}}</h4>'; 
@@ -249,12 +249,12 @@ else
 		echo '"';
 	}
 	if ($show_overlay) {
-		echo " data-cycle-overlay=\"#{$overlay_name}-{$module->id}\"";
-		echo ' data-cycle-overlay-template="<div>';
+		echo " data-cycle-overlay='#{$overlay_name}-{$module->id}'";
+		echo " data-cycle-overlay-template='<div>";
 		if ($overlay_show_title) echo '<h4>{{title}}</h4>'; 
 		if ($overlay_show_desc) echo '<p>{{description}}</p>';
 		if ($overlay_show_readmore) echo "<a href={{readmore}}>{$readmore_txt}</a>";
-		echo '</div>"';
+		echo "</div>'";
 	}
 	echo '>';
 
@@ -288,9 +288,9 @@ else
 		}
 		if ($show_caption || $show_overlay)
 		{
-			if ($overlay_show_title || $caption_show_title) echo " data-title=\"{$slide->title}\"";
-			if ($overlay_show_desc || $caption_show_desc) echo " data-description=\"{$slide->description}\"";
-			if ($overlay_show_readmore || $caption_show_readmore || $caption_link_to_article) echo " data-readmore=\"{$slide->link}\"";
+			if ($overlay_show_title || $caption_show_title) echo " data-title='{$slide->title}'";
+			if ($overlay_show_desc || $caption_show_desc) echo " data-description='{$slide->description}'";
+			if ($overlay_show_readmore || $caption_show_readmore || $caption_link_to_article) echo " data-readmore='{$slide->link}'";
 		}
 		echo '>';
 		if ($has_links)
