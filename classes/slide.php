@@ -1,7 +1,7 @@
 <?php
 /**
  * @package smz_slideshow
- * @version 3.5.1
+ * @version 3.6
  * @author Sergio Manzi
  * @link http://smz.it
  * @copyright Copyright (c) 2013 - 2015 Sergio Manzi. All Rights Reserved.
