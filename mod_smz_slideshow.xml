@@ -111,14 +111,17 @@
 					<option value="1">MOD_SMZ_SLIDESHOW_CATEGORIES_SRC</option>
 					<option value="2">MOD_SMZ_SLIDESHOW_ARTICLES_SRC</option>
 				</field>
+
+				<field name="smz_slideshow_folder_image" showon="slides_source:0" show_root="true" type="text" label="MOD_SMZ_SLIDESHOW_FOLDER_IMAGE_LBL" description="MOD_SMZ_SLIDESHOW_FOLDER_IMAGE_DESC" />
+				<field name="smz_slideshow_info_file" showon="slides_source:0" type="text" default="info.csv" label="MOD_SMZ_SLIDESHOW_INFOFILE_LBL" description="MOD_SMZ_SLIDESHOW_INFOFILE_DESC" />
+				<field name="smz_slideshow_info_title_field" showon="slides_source:0" type="text" default="Title" label="SMZ_SLIDESHOW_INFO_TITLE_FIELD_LBL" description="SMZ_SLIDESHOW_INFO_TITLE_FIELD_DESC" />
+				<field name="smz_slideshow_info_description_field" showon="slides_source:0" type="text" default="Description" label="SMZ_SLIDESHOW_INFO_DESCRIPTION_FIELD_LBL" description="SMZ_SLIDESHOW_INFO_DESCRIPTION_FIELD_DESC" />
+
 				<field name="smz_slideshow_article_image_source" showon="slides_source:1,2" type="list" default="1" label="MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_LBL" description="MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_DESC">
 					<option value="1">MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_INTRO_IMAGE</option>
 					<option value="2">MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_FULL_IMAGE</option>
 					<option value="3">MOD_SMZ_SLIDESHOW_IMAGE_SOURCE_FIRST_IMAGE</option>
 				</field>
-				<field name="smz_slideshow_folder_image" showon="slides_source:0" show_root="true" type="text" label="MOD_SMZ_SLIDESHOW_FOLDER_IMAGE_LBL" description="MOD_SMZ_SLIDESHOW_FOLDER_IMAGE_DESC" />
-				<field name="smz_slideshow_info_file" type="text" default="info.txt" label="MOD_SMZ_SLIDESHOW_INFOFILE_LBL" description="MOD_SMZ_SLIDESHOW_INFOFILE_DESC" />
-				<field name="smz_slideshow_info_file_separator" type="text" maxlength="1" default="," label="MOD_SMZ_SLIDESHOW_INFOFILE_SEPARATOR_LBL" description="MOD_SMZ_SLIDESHOW_INFOFILE_SEPARATOR_DESC" />
 				<field name="smz_slideshow_categories" showon="slides_source:1" show_root="true" type="category" extension="com_content" multiple="true" size="10" label="MOD_SMZ_SLIDESHOW_CATEGORIES_LBL" description="MOD_SMZ_SLIDESHOW_CATEGORIES_DESC" />
 				<field name="smz_slideshow_article_ids" showon="slides_source:2" show_root="true" type="text"  label="MOD_SMZ_SLIDESHOW_ARTICLES_LBL" description="MOD_SMZ_SLIDESHOW_ARTICLES_DESC" />
 				<field name="smz_slideshow_categories_children" showon="slides_source:1" type="radio" class="btn-group" default="0" label="MOD_SMZ_SLIDESHOW_CATEGORIES_CHILDREN_LBL" description="MOD_SMZ_SLIDESHOW_CATEGORIES_CHILDREN_DESC">

@@ -49,93 +49,85 @@ class modSMZSlideShowHelper {
 					$slide->loadImages($dir, $tmp['basename']);
 					$slides[] = $slide;
 				}
-
-				// Get images info
-				$handle = @fopen($imagesDir  . '/' . trim($params->get('smz_slideshow_info_file', 'info.txt')), 'r');
-				if ($handle)
-				{
-					$titles = array();
-					$descriptions = array();
-					$ids = array();
-					
-					while (($ln = self::readline($handle, true, true)) !== false)
-					{
-						$ln_array = explode($params->get('smz_slideshow_info_file_separator', ','), $ln);
-						if (array_key_exists(0, $ln_array) && array_key_exists(1, $ln_array))
-						{
-							foreach ($ln_array as $i => $v)
-							{
-								$v = trim(strip_tags($v), " \t\n\r\0\x0B\"");
-								$ln_array[$i] = $v;
-							}
-							if (!empty($ln_array[1]))
-							{
-								$titles[$ln_array[0]] = $ln_array[1];
-							}
-							if (!empty($ln_array[2]))
-							{
-								$descriptions[$ln_array[0]] = $ln_array[2];
-							}
-							if (!empty($ln_array[3]))
-							{
-								$ids[$ln_array[0]] = $ln_array[3];
-							}
-						}
-					}
-					fclose($handle);
-
-					foreach($slides as $slide)
-					{
-						if (array_key_exists($slide->filename, $titles))
-						{
-							$slide->title = htmlentities($titles[$slide->filename], ENT_QUOTES);
-						}
-						if (array_key_exists($slide->filename, $descriptions))
-						{
-							$slide->description = htmlentities($descriptions[$slide->filename], ENT_QUOTES);
-						}
-						if (array_key_exists($slide->filename, $ids))
-						{
-							$slide->id = htmlentities($ids[$slide->filename], ENT_QUOTES);
-						}
-					}
-				}
-				// End Get images info
-				
 			}
 		}
-		return $slides;
-	}
 
-	// Read a "clean" line from file
-	static function readline($handle, $trim=false, $strip_tags=false) {
-		$ln = false;
+		// Get images info
+		$filename = $imagesDir  . '/' . trim($params->get('smz_slideshow_info_file', 'info.csv'));
+		$basename = substr($filename, 0, strlen($filename) - strlen(strrchr($filename, '.')));
+		$suffix = strstr($filename, '.');
+		$lang1 = '.' . JFactory::getLanguage()->getTag();
+		$lang2 = strstr($lang1, '-', true);
+		$info = array();
+		$title_field = trim($params->get('smz_slideshow_info_title_field', 'Title'));
+		$description_field = trim($params->get('smz_slideshow_info_description_field', 'Description'));
+		$id_field = trim($params->get('smz_slideshow_info_id_field', 'ID'));
+
+		$handle = @fopen($basename . $lang1 . $suffix, 'r');
+		if ($handle === false)
+		{
+			$handle = @fopen($basename . $lang2 . $suffix, 'r');
+		}
+		if ($handle === false)
+		{
+			$handle = @fopen($filename, 'r');
+		}
 
 		if ($handle)
 		{
-			if (($ln = fgets($handle)) === false)
+			// Read the first line as the $heading array (list of tags)
+			if (is_array($heading = fgetcsv($handle)))
 			{
-				return false;
-			}
+				unset($heading[0]); // The first element ALWAYS is the filename
 
-			if (!mb_detect_encoding($ln, 'UTF-8', true))
-			{
-				$ln = utf8_encode($ln);
-			}
+				// And trim the tag names
+				$heading = array_map('trim', $heading);
+				
+				// Read the rest of the csv and build the $info array
+				while (is_array($temp = fgetcsv($handle)))
+				{
+					$temp = array_map('trim', $temp);
+					$key = $temp[0];
+					unset($temp[0]);
+					$info[$key] = $temp;
+				}
+				fclose($handle);
 
-			if ($strip_tags)
-			{
-				$ln = trim(strip_tags($ln));
-			}
-
-			if ($trim)
-			{
-				$ln = trim($ln);
+				// Now for each slide let's see if we have $info element
+				foreach ($slides as $slide)
+				{
+					if (array_key_exists($slide->filename, $info))
+					{
+						// If we do, we move set the appropriate info to the slide object
+						foreach ($heading as $key => $tag)
+						{
+							if (array_key_exists($key, $info[$slide->filename]))
+							{
+								$value = $info[$slide->filename][$key];
+							}
+							else
+							{
+								$value = '';
+							}
+						
+							if ($tag == $title_field)
+							{
+								$slide->title = htmlentities($value, ENT_QUOTES);
+							}
+							else if ($tag == $description_field)
+							{
+								$slide->description = htmlentities($value, ENT_QUOTES);
+							}
+						}
+					}
+				}
 			}
 		}
+		// End Get images info
 
-		return $ln;
+		return $slides;
 	}
+
 
 	static function getSlidesFromContent($params) {
 		$slides = array();

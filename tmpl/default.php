@@ -243,7 +243,7 @@ else
 		echo ' data-cycle-caption-template="';
 		if ($caption_link_to_article) echo "<a class='slideshow-caption-link' href={{readmore}}>";
 		if ($caption_show_title) echo '<h4>{{title}}</h4>'; 
-		if ($caption_show_desc) echo '{{description}}';
+		if ($caption_show_desc) echo '<p>{{description}}</p>';
 		if ($caption_link_to_article) echo '</a>';
 		if ($caption_show_readmore) echo "<span class=&quot;slideshow-readmore&quot;><a href={{readmore}}>{$readmore_txt}</a></span>";
 		echo '"';
@@ -293,6 +293,7 @@ else
 			if ($overlay_show_readmore || $caption_show_readmore || $caption_link_to_article) echo " data-readmore='{$slide->link}'";
 		}
 		echo '>';
+
 		if ($has_links)
 		{
 			echo "<img alt='' src='{$slide->getMainImage()}'>";
