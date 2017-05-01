@@ -82,7 +82,7 @@ class modSMZSlideShowHelper {
 
 				// And trim the tag names
 				$heading = array_map('trim', $heading);
-				
+
 				// Read the rest of the csv and build the $info array
 				while (is_array($temp = fgetcsv($handle)))
 				{
@@ -109,7 +109,7 @@ class modSMZSlideShowHelper {
 							{
 								$value = '';
 							}
-						
+
 							if ($tag == $title_field)
 							{
 								$slide->title = htmlentities($value, ENT_QUOTES);
@@ -135,7 +135,7 @@ class modSMZSlideShowHelper {
 		$limit = $params->get('smz_slideshow_count', 0);
 		$orderby = $params->get('smz_slideshow_orderby',1);
 		$ordering = $params->get('smz_slideshow_ordering','ASC');
-		
+
 		switch ($orderby)
 		{
 			case 1:
@@ -197,7 +197,7 @@ class modSMZSlideShowHelper {
 		{
 			return $slides;
 		}
-		
+
 		if (!is_null($table))
 		{
 			if (is_numeric($selector))
@@ -208,7 +208,7 @@ class modSMZSlideShowHelper {
 			{
 				$selector = $selector_field . " IN(" . $selector . ")";
 			}
-		
+
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 			$query->select("c.".$select);
@@ -248,14 +248,14 @@ class modSMZSlideShowHelper {
 			{
 				$db->setQuery($query);
 			}
-	
+
 			$rows = $db->loadObjectList();
-	
+
 			if (empty($rows))
 			{
 				return $slides;
 			}
-	
+
 			foreach ($rows as $row)
 			{
 				$slide = new SMZSlide($params);

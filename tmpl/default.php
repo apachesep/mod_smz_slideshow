@@ -300,7 +300,7 @@ else
 			echo '</a>';
 		}
 	}
-	
+
 	// Overlay
 	if ($show_overlay) echo "<div id='{$overlay_name}-{$module->id}' class='{$overlay_class}{$overlay_hidden_phone}' style='{$overlay_css}'></div>";
 	if ($pager_overlay) echo "<div id='{$pager_name}-{$module->id}' class='{$pager_class}{$controls_hidden_phone}' style='{$pager_css}'></div>";
