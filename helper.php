@@ -51,7 +51,7 @@ class modSMZSlideShowHelper {
 				}
 
 				// Get images info
-				$handle = @fopen($imagesDir  . '/' . 'titles.txt', 'r');	// SMZDEV parametrize file name
+				$handle = @fopen($imagesDir  . '/' . trim($params->get('smz_slideshow_info_file', 'info.txt')), 'r');
 				if ($handle)
 				{
 					$titles = array();
@@ -60,12 +60,12 @@ class modSMZSlideShowHelper {
 					
 					while (($ln = self::readline($handle, true, true)) !== false)
 					{
-						$ln_array = explode(':', $ln);							// SMZDEV parametrize tags separator
+						$ln_array = explode($params->get('smz_slideshow_info_file_separator', ','), $ln);
 						if (array_key_exists(0, $ln_array) && array_key_exists(1, $ln_array))
 						{
 							foreach ($ln_array as $i => $v)
 							{
-								$v = trim(strip_tags($v));
+								$v = trim(strip_tags($v), " \t\n\r\0\x0B\"");
 								$ln_array[$i] = $v;
 							}
 							if (!empty($ln_array[1]))
