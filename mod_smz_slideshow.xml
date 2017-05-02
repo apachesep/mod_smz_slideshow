@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 3 or (at your option) any later version.</license>
 	<name>SMZ SlideShow</name>
 	<description>MOD_SMZ_SLIDESHOW_DESC</description>
-	<version>3.6.0</version>
+	<version>3.6.1</version>
 	<creationDate>May 2017</creationDate>
 	<files folder="site">
 		<filename>helper.php</filename>

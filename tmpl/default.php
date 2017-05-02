@@ -288,9 +288,9 @@ else
 		}
 		if ($show_caption || $show_overlay)
 		{
-			if ($overlay_show_title || $caption_show_title) echo " data-title='{$slide->title}'";
-			if ($overlay_show_desc || $caption_show_desc) echo " data-description='{$slide->description}'";
-			if ($overlay_show_readmore || $caption_show_readmore || $caption_link_to_article) echo " data-readmore='{$slide->link}'";
+			if ($overlay_show_title || $caption_show_title) echo " data-title=\"{$slide->title}\"";
+			if ($overlay_show_desc || $caption_show_desc) echo " data-description=\"{$slide->description}\"";
+			if ($overlay_show_readmore || $caption_show_readmore || $caption_link_to_article) echo " data-readmore=\"{$slide->link}\"";
 		}
 		echo '>';
 
